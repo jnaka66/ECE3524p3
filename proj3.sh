@@ -33,7 +33,7 @@ case $opt in
 		  echo "DNS domain :  $(hostname -d)"
 		  echo "Fully qualified domain name : $(hostname -f)"
 		  echo "Network address (IP) : $(nslookup 'hostname' | grep -i address | awk -F" " '{print $2}' | awk -F# '{print $1}' | tail -n 1)"
-		  echo "DNS name servers (DNS IP) : $(grep "nameserver" /etc/resolv.conf | sed 's/nameserver//')"
+		  echo "DNS name servers (DNS IP) : $(dnsdomainname)"
 		  n1=0
 		  while [ "$n1" != "" ]
 		  do
@@ -114,11 +114,12 @@ case $opt in
 		  
       ;;
       'My home file-tree')
-      	 sh ./proj1.sh ~/ ./filetree.html
+      	 sh ./proj1.sh ~/ filetree.html
+      	 mv ~/filetree.html .
       	 sh ./proj3.sh
       ;;
       'Process operations')
-      
+      	sh ./proc.sh
       ;;
       'Exit')
       	break
